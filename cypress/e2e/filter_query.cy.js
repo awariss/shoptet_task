@@ -1,15 +1,14 @@
+// Selector for "Stock" filter checkbox
+const stocksCheckbox = 'input[data-filter-code="stock"]';
+
+// Filters for "Action," "New," and "Tip"
+const filterCheckboxes = [
+  { name: 'Action', id: '1', testId: 'input[data-filter-id="1"][name="dd[]"]' },
+  { name: 'New', id: '2', testId: 'input[data-filter-id="2"][name="dd[]"]' },
+  { name: 'Tip', id: '3', testId: 'input[data-filter-id="3"][name="dd[]"]' }
+];
+
 describe('Filter - query test', () => {
-
-  // Selector for "Stock" filter checkbox
-  const stocksCheckbox = 'input[data-filter-code="stock"]';
-
-  // Filters for "Action," "New," and "Tip"
-  const filterCheckboxes = [
-    { name: 'Action', id: '1', testId: 'input[data-filter-id="1"][name="dd[]"]' },
-    { name: 'New', id: '2', testId: 'input[data-filter-id="2"][name="dd[]"]' },
-    { name: 'Tip', id: '3', testId: 'input[data-filter-id="3"][name="dd[]"]' }
-  ];
-
   // Navigate to the product page before each test
   beforeEach(() => {
     cy.visit('https://pop.shoptet.cz/obleceni/');
@@ -35,10 +34,12 @@ describe('Filter - query test', () => {
 
   // Test combined "New" and "Tip" filters
   it('check more dd checkboxes', () => {
-    cy.intercept('GET', `*?dd=${filterCheckboxes[2].id},${filterCheckboxes[1].id}`).as('getFilter');
-    cy.get(filterCheckboxes[2].testId).click(); // Click "Tip"
-    cy.get(filterCheckboxes[1].testId).click(); // Click "New"
+    const testCheckbox1= filterCheckboxes[1];
+    const testCheckbox2 = filterCheckboxes[2];
+    cy.intercept('GET', `*?dd=${testCheckbox2.id},${testCheckbox1.id}`).as('getFilter');
+    cy.get(testCheckbox2.testId).click(); // Click "Tip"
+    cy.get(testCheckbox1.testId).click(); // Click "New"
     cy.wait('@getFilter').its('response.statusCode').should('eq', 200); // Verify request
-    cy.url().should('match', new RegExp(`\\?dd=${filterCheckboxes[2].id},${filterCheckboxes[1].id}`)); // Verify URL
+    cy.url().should('match', new RegExp(`\\?dd=${testCheckbox2.id},${testCheckbox1.id}`)); // Verify URL
   });
 });

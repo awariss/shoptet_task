@@ -1,12 +1,14 @@
 Test Scenarios for Filter - query test
 
+Global precondition:
+- Navigate to the product category page - https://pop.shoptet.cz/obleceni/.
+
 Scenario 1: Verify "Stock" filter functionality
 
 Preconditions:
 - The product category page includes a "Stock" filter.
 
 Steps:
-- Navigate to the product category page.
 - Click on the "Stock" filter checkbox.
 - Verify that a request is sent with the parameter ?stock=1.
 - Verify that the URL includes ?stock=1.
@@ -22,7 +24,6 @@ Preconditions:
 - The product category page includes "Action," "New," and "Tip" filters.
 
 Steps:
-- Navigate to the product category page.
 - For each filter ("Action," "New," or "Tip"):
 - Click on the filter checkbox.
 - Verify that a request is sent with the parameter ?dd=<filterId> (e.g., 1, 2, or 3).
@@ -38,7 +39,6 @@ Preconditions:
 - The product category page includes "New" and "Tip" filters.
 
 Steps:
-- Navigate to the product category page.
 - Click on the "Tip" filter checkbox.
 - Click on the "New" filter checkbox.
 - Verify that a request is sent with the combined parameters ?dd=3,2.
@@ -55,7 +55,6 @@ Preconditions:
 - The product category page allows combining multiple filters.
 
 Steps:
-- Navigate to the product category page.
 - Select multiple filters (e.g., "Tip" and "New").
 - Refresh the page.
 - Verify that the selected filters remain active.

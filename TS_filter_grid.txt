@@ -1,12 +1,14 @@
 Test Scenarios for Filter - product grid test
 
+Global precondition:
+- Navigate to the product category page - https://pop.shoptet.cz/obleceni/.
+
 Scenario 1: Verify "Stock" filter functionality
 
 Preconditions:
 - The product category page includes a "Stock" filter.
 
 Steps:
-- Navigate to the product category page.
 - Click on the "Stock" filter checkbox.
 - Verify that the filter request is sent with the parameter ?stock=1.
 - Ensure all displayed products contain the availability text element.
@@ -23,7 +25,6 @@ Preconditions:
 - The product category page includes an "Action" filter.
 
 Steps:
-- Navigate to the product category page.
 - Click on the "Action" filter checkbox.
 - Verify that the filter request is sent with the parameter ?dd=1.
 - Ensure all displayed products contain the "Action" label element.
@@ -40,7 +41,6 @@ Preconditions:
 - The product category page includes "New" and "Tip" filters.
 
 Steps:
-- Navigate to the product category page.
 - Click on the "New" filter checkbox.
 - Click on the "Tip" filter checkbox.
 - Verify that the filter request is sent with the parameters ?dd=2,3.
