@@ -1,0 +1,95 @@
+Test Scenarios for Filter - query test
+
+Scenario 1: Verify "Stock" filter functionality
+
+Preconditions:
+- The product category page includes a "Stock" filter.
+
+Steps:
+- Navigate to the product category page.
+- Click on the "Stock" filter checkbox.
+- Verify that a request is sent with the parameter ?stock=1.
+- Verify that the URL includes ?stock=1.
+
+Expected Result:
+- The filter request is sent successfully with the correct parameter.
+- The URL reflects the selected filter with the parameter ?stock=1.
+
+
+Scenario 2: Verify individual filter functionality
+
+Preconditions:
+- The product category page includes "Action," "New," and "Tip" filters.
+
+Steps:
+- Navigate to the product category page.
+- For each filter ("Action," "New," or "Tip"):
+- Click on the filter checkbox.
+- Verify that a request is sent with the parameter ?dd=<filterId> (e.g., 1, 2, or 3).
+- Verify that the URL includes ?dd=<filterId>.
+
+Expected Result:
+- For each filter, the correct request is sent, and the URL reflects the selected filter with the appropriate parameter.
+
+
+Scenario 3: Verify combined filter functionality for "New" and "Tip"
+
+Preconditions:
+- The product category page includes "New" and "Tip" filters.
+
+Steps:
+- Navigate to the product category page.
+- Click on the "Tip" filter checkbox.
+- Click on the "New" filter checkbox.
+- Verify that a request is sent with the combined parameters ?dd=3,2.
+- Verify that the URL matches the pattern ?dd=3,2.
+
+Expected Result:
+- The filter request is sent successfully with the combined parameters ?dd=3,2.
+- The URL reflects the selected filters with the combined parameters.
+
+
+Scenario 4: Verify query parameter consistency
+
+Preconditions:
+- The product category page allows combining multiple filters.
+
+Steps:
+- Navigate to the product category page.
+- Select multiple filters (e.g., "Tip" and "New").
+- Refresh the page.
+- Verify that the selected filters remain active.
+- Verify that the URL still includes the correct combined parameters.
+
+Expected Result:
+- The URL remains consistent, and selected filters persist after the page refresh.
+
+In Gherkin:
+
+Feature: Filter query functionality on the product category page
+  As a user, I want to apply filters and verify their correct query parameters in the URL.
+
+  Scenario Outline: Verify individual filter functionality
+    GIVEN I am on the product category page
+    WHEN I click on the "<filterName>" filter checkbox
+    THEN a request is sent with the parameter "?dd=<filterId>"
+    AND the URL includes "?dd=<filterId>"
+
+    Examples:
+      | filterName | filterId |
+      | Action     | 1        |
+      | New        | 2        |
+      | Tip        | 3        |
+
+  Scenario: Verify "Stock" filter functionality
+    GIVEN I am on the product category page
+    WHEN I click on the "Stock" filter checkbox
+    THEN a request is sent with the parameter "?stock=1"
+    AND the URL includes "?stock=1"
+
+  Scenario: Verify combined filter functionality for "New" and "Tip"
+    GIVEN I am on the product category page
+    WHEN I click on the "Tip" filter checkbox
+    AND I click on the "New" filter checkbox
+    THEN a request is sent with the parameters "?dd=3,2"
+    AND the URL matches the pattern "?dd=3,2"

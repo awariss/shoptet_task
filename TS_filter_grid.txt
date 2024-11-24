@@ -1,0 +1,80 @@
+Test Scenarios for Filter - product grid test
+
+Scenario 1: Verify "Stock" filter functionality
+
+Preconditions:
+- The product category page includes a "Stock" filter.
+
+Steps:
+- Navigate to the product category page.
+- Click on the "Stock" filter checkbox.
+- Verify that the filter request is sent with the parameter ?stock=1.
+- Ensure all displayed products contain the availability text element.
+- Compare the number of displayed products with the count shown in the filter summary.
+
+Expected Result:
+- The displayed product count matches the filter summary count.
+- All displayed products show the availability label.
+
+
+Scenario 2: Verify "Action" filter functionality
+
+Preconditions:
+- The product category page includes an "Action" filter.
+
+Steps:
+- Navigate to the product category page.
+- Click on the "Action" filter checkbox.
+- Verify that the filter request is sent with the parameter ?dd=1.
+- Ensure all displayed products contain the "Action" label element.
+- Compare the number of displayed products with the count shown in the filter summary.
+
+Expected Result:
+- The displayed product count matches the filter summary count.
+- All displayed products show the "Action" label.
+
+
+Scenario 3: Verify combined "New" and "Tip" filter functionality
+
+Preconditions:
+- The product category page includes "New" and "Tip" filters.
+
+Steps:
+- Navigate to the product category page.
+- Click on the "New" filter checkbox.
+- Click on the "Tip" filter checkbox.
+- Verify that the filter request is sent with the parameters ?dd=2,3.
+- Ensure all displayed products contain both "New" and "Tip" label elements.
+- Compare the number of displayed products with the count shown in the filter summary.
+
+Expected Result:
+- The displayed product count matches the filter summary count.
+- All displayed products show both the "New" and "Tip" labels.
+
+In Gherkin:
+
+Feature: Filter functionality on the product category page
+  As a user, I want to use filters to refine the product list and verify the correct functionality of filters.
+
+  Scenario: Verify "Stock" filter functionality
+    GIVEN I am on the product category page
+    WHEN I click on the "Stock" filter checkbox
+    THEN a request is sent with the parameter "?stock=1"
+    AND all displayed products show the availability text
+    AND the product count matches the count in the filter summary
+
+  Scenario: Verify "Action" filter functionality
+    GIVEN I am on the product category page
+    WHEN I click on the "Action" filter checkbox
+    THEN a request is sent with the parameter "?dd=1"
+    AND all displayed products show the "Action" label
+    AND the product count matches the count in the filter summary
+
+  Scenario: Verify combined "New" and "Tip" filter functionality
+    GIVEN I am on the product category page
+    WHEN I click on the "New" filter checkbox
+    AND I click on the "Tip" filter checkbox
+    THEN a request is sent with the parameters "?dd=2,3"
+    AND all displayed products show the "New" label
+    AND all displayed products show the "Tip" label
+    AND the product count matches the count in the filter summary
